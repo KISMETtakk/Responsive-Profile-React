@@ -1,9 +1,6 @@
 import VideoThumb from "@/public/images/alumni.gif";
 import ModalVideo from "@/components/modal-video";
-import Image1 from "@/public/images/img1.jpg"; // Update path as necessary
-import Image2 from "@/public/images/img2.jpg"; // Update path as necessary
-import Image3 from "@/public/images/img3.jpg"; // Update path as necessary
-import Image4 from "@/public/images/img4.jpg";
+
 
 export default function HeroHome() {
   return (

@@ -1,11 +1,41 @@
-export const metadata = {
-  title: "Sign Up - Open PRO",
-  description: "Page description",
-};
+"use client"; // Ensure the component remains a client-side component
 
-import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import Link from "next/link"; // Import Link for navigation
 
 export default function SignUp() {
+  const router = useRouter(); // Initialize the router
+  const [formData, setFormData] = useState({
+    stuno: "",
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    campus: "PRETORIA", // Default value
+  });
+
+  // Handle form changes and preserve state
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Create a query string from form data
+    const queryString = new URLSearchParams(formData).toString();
+    
+    // Navigate to confirmation page with form data as query parameters
+    router.push(`/confirm-profile?${queryString}`);
+  };
+
   return (
     <section>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -17,13 +47,11 @@ export default function SignUp() {
             </h1>
           </div>
           {/* Contact form */}
-          <form className="mx-auto max-w-[400px]">
+          <form className="mx-auto max-w-[400px]" onSubmit={handleSubmit}>
             <div className="space-y-5">
+              {/* Input fields as before */}
               <div>
-                <label
-                  className="mb-1 block text-sm font-medium text-indigo-200/65"
-                  htmlFor="stuno"
-                >
+                <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="stuno">
                   Student Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -32,13 +60,40 @@ export default function SignUp() {
                   className="form-input w-full"
                   placeholder="Your student number"
                   required
+                  value={formData.stuno}
+                  onChange={handleInputChange}
                 />
               </div>
               <div>
-                <label
-                  className="mb-1 block text-sm font-medium text-indigo-200/65"
-                  htmlFor="email"
-                >
+                <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="name">
+                  First Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  className="form-input w-full"
+                  placeholder="e.g. Tshiamo"
+                  required
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="surname">
+                  Last Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="surname"
+                  type="text"
+                  className="form-input w-full"
+                  placeholder="e.g. Matiza"
+                  required
+                  value={formData.surname}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="email">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -47,27 +102,12 @@ export default function SignUp() {
                   className="form-input w-full"
                   placeholder="Your work email"
                   required
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
               </div>
-              {/* <div>
-                <label
-                  className="mb-1 block text-sm font-medium text-indigo-200/65"
-                  htmlFor="email"
-                >
-                  Work Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  className="form-input w-full"
-                  placeholder="Your work email"
-                />
-              </div> */}
               <div>
-                <label
-                  className="block text-sm font-medium text-indigo-200/65"
-                  htmlFor="password"
-                >
+                <label className="block text-sm font-medium text-indigo-200/65" htmlFor="password">
                   Password <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -75,36 +115,53 @@ export default function SignUp() {
                   type="password"
                   className="form-input w-full"
                   placeholder="Password (at least 10 characters)"
+                  required
+                  value={formData.password}
+                  onChange={handleInputChange}
                 />
               </div>
               <div>
-                <label
-                  className="block text-sm font-medium text-indigo-200/65"
-                  htmlFor="cpassword"
-                >
-                  Confirm Password <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-indigo-200/65" htmlFor="cpassword">
+                  Confirm <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="cpassword"
                   type="password"
                   className="form-input w-full"
                   placeholder="Confirm Password"
+                  required
+                  value={formData.cpassword}
+                  onChange={handleInputChange}
                 />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="campus">
+                  Campus <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="campus"
+                  className="form-input w-full"
+                  value={formData.campus}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="PRETORIA">PRETORIA</option>
+                  <option value="SOSHANGUVE">SOSHANGUVE</option>
+                  <option value="GA-RANKUWA">GA-RANKUWA</option>
+                  <option value="ARCADIA">ARCADIA</option>
+                  <option value="eMALAHLENI">eMALAHLENI</option>
+                  <option value="MBOMBELA">MBOMBELA</option>
+                  <option value="POLOKWANE">POLOKWANE</option>
+                </select>
               </div>
             </div>
             <div className="mt-6 space-y-5">
-              <Link
-                href="/confirm-profile"
+              <button
+                type="submit"
                 className="btn w-full bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:bg-[length:100%_150%]"
               >
-                Confirm Alumni Profile
-              </Link>
-              {/* <div className="flex items-center gap-3 text-center text-sm italic text-gray-600 before:h-px before:flex-1 before:bg-gradient-to-r before:from-transparent before:via-gray-400/25 after:h-px after:flex-1 after:bg-gradient-to-r after:from-transparent after:via-gray-400/25">
-                or
-              </div>
-              <button className="btn relative w-full bg-gradient-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] text-gray-300 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_right,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-[length:100%_150%]">
-                Sign In with Google
-              </button> */}
+                Next
+              </button>
             </div>
           </form>
           {/* Bottom link */}

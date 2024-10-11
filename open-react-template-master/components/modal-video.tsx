@@ -1,10 +1,74 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef  } from "react";
 import type { StaticImageData } from "next/image";
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
 import SecondaryIllustration from "@/public/images/secondary-illustration.svg";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+
+// Slideshow component
+interface SlideshowProps {
+  width: number; // Define width as a number
+  height: number; // Define height as a number
+}
+
+function Slideshow({ width, height }: SlideshowProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = [
+    "/images/1.png",
+    "/images/2.png",
+    "/images/3.png",   // Add more image paths as needed
+  ];
+
+  // Automatically move to the next slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 6000); // Change slide every 6 seconds
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="relative mt-6">
+      <button
+        className="absolute left-0 z-10 p-2 bg-gray-900 text-white rounded-full"
+        onClick={prevSlide}
+      >
+        &#10094; {/* Left arrow */}
+      </button>
+      <div className="overflow-hidden rounded-2xl" style={{ width, height }}>
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <div className="min-w-full" key={index}>
+              <Image
+                className="w-full h-full object-cover"
+                src={image}
+                width={width} // Adjust width as needed
+                height={height} // Adjust height as needed
+                alt={`Slide ${index + 1}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <button
+        className="absolute right-0 z-10 p-2 bg-gray-900 text-white rounded-full"
+        onClick={nextSlide}
+      >
+        &#10095; {/* Right arrow */}
+      </button>
+    </div>
+  );
+}
 
 interface ModalVideoProps {
   thumb: StaticImageData;
@@ -132,6 +196,9 @@ export default function ModalVideo({
           </div>
         </div>
       </Dialog>
+
+      {/* Slideshow Section */}
+      <Slideshow width={thumbWidth} height={thumbHeight} />
     </div>
   );
 }
