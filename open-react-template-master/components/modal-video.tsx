@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef  } from "react";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
+import './ui/SlideShowCss/Slideshow.css'; // Adjust the path as needed
 import SecondaryIllustration from "@/public/images/secondary-illustration.svg";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
@@ -35,14 +36,14 @@ function Slideshow({ width, height }: SlideshowProps) {
   };
 
   return (
-    <div className="relative mt-6">
+    <div className="slideshow-container relative mt-6">
       <button
         className="absolute left-0 z-10 p-2 bg-gray-900 text-white rounded-full"
         onClick={prevSlide}
       >
         &#10094; {/* Left arrow */}
       </button>
-      <div className="overflow-hidden rounded-2xl" style={{ width, height }}>
+      <div className="overflow-hidden rounded-2xl">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -68,6 +69,7 @@ function Slideshow({ width, height }: SlideshowProps) {
       </button>
     </div>
   );
+  
 }
 
 interface ModalVideoProps {

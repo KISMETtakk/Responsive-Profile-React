@@ -1,0 +1,45 @@
+/* Base styles for the slideshow */
+.slideshow-container {
+  width: 100%; /* Default full width */
+  max-width: 1200px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Center the slideshow */
+  overflow: hidden; /* Hide overflow for the sliding effect */
+  border-radius: 12px; /* Rounded corners */
+  margin-top: 30px;
+}
+
+/* Base styles for the images */
+.slideshow-container img {
+  width: 100%; /* Images take full width of the container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Cover the area while maintaining aspect ratio */
+}
+
+/* Media Queries for different screen sizes */
+@media (max-width: 1200px) {
+  .slideshow-container {
+    width: 90%; /* 90% of the viewport for medium screens */
+    height: 400px; /* Adjust height as necessary */
+  }
+}
+
+@media (max-width: 768px) {
+  .slideshow-container {
+    width: 80%; /* 80% of the viewport for smaller screens */
+    height: 300px; /* Adjust height for smaller devices */
+  }
+}
+
+@media (max-width: 576px) {
+  .slideshow-container {
+    width: 100%; /* Full width for mobile devices */
+    height: 250px; /* Adjust height for mobile devices */
+  }
+}
+
+/* Adjust images within the slideshow */
+@media (max-width: 768px) {
+  .slideshow-container img {
+    object-fit: contain; /* Change to contain for smaller screens */
+  }
+}
