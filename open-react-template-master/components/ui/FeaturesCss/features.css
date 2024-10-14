@@ -1,0 +1,161 @@
+.features-section {
+    position: relative;
+  }
+  
+  .background-shape-gray {
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: -10;
+    margin-top: -20px;
+    transform: translateX(-50%);
+  }
+  
+  .background-shape {
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: -10;
+    margin-bottom: -80px;
+    transform: translateX(-120%);
+    opacity: 0.5;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 0 1rem;
+  }
+  
+  .header-border {
+    padding: 3rem 0;
+    border-image: linear-gradient(to right, transparent, rgba(107, 114, 128, 0.25), transparent) 1;
+  }
+  
+  .header-content {
+    margin: 0 auto;
+    max-width: 750px;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .title {
+    animation: gradient 6s linear infinite;
+    background: linear-gradient(to right, #e5e7eb, #818cf8, #f3f4f6, #a5b4fc, #e5e7eb);
+    background-size: 200% auto;
+    background-clip: text;
+    padding-bottom: 1rem;
+    font-family: 'Nacelle', sans-serif;
+    font-size: 1.875rem;
+    font-weight: 600;
+  }
+  
+  .description {
+    font-size: 1.125rem;
+    color: rgba(99, 102, 241, 0.65);
+  }
+  
+  .progress-container {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 1rem;
+    background-color: #d1d5db;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background-color: #4f46e5; /* Your active color */
+    border-radius: 9999px; /* Full rounding for the progress bar */
+    transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
+  }
+  
+  .steps-display {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .step-item {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .active-step {
+    color: white;
+    font-weight: bold;
+    background-color: #4f46e5;
+    border-radius: 9999px;
+    padding: 0.5rem;
+  }
+  
+  .inactive-step {
+    color: rgba(156, 163, 175);
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  
+  .back-button,
+  .next-button {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: #4f46e5;
+    color: white;
+  }
+  
+  .back-button:disabled,
+  .next-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .flash-card-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+  }
+  
+  .flash-card {
+    width: 200px; /* Set width to 200px */
+    height: 300px; /* Set height to 300px */
+    background-color: white; /* Background color for flash card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, filter 0.5s ease; /* Smooth transition for opacity and blur */
+  }
+  
+  .flash-card-content {
+    text-align: center; /* Center text in flash card */
+  }
+  
+  .flash-card-title {
+    font-weight: bold; /* Bold font for title */
+    font-size: 1.25rem; /* Font size for title */
+  }
+  
+  .flash-card-text {
+    margin-top: 0.5rem; /* Margin for text */
+  }
+  
+  
